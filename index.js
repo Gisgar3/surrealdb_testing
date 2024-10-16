@@ -12,7 +12,7 @@ await db.use({
     database: "application"
 }).then(() => {console.log("NAMESPACE AND DATABASE SELECTED")});
 
-let createData = await db.create(new RecordId("person", "gavin"), {
+let createData = await db.create("user", {
     title: "Software Engineer",
     name: {
         first: "Gavin",
@@ -24,6 +24,6 @@ let createData = await db.create(new RecordId("person", "gavin"), {
 }).catch((err) => {
     console.log(err);
 });
-let updateUser = await db.patch(new RecordId('person', createData.id.id), [
-    { op: 'add', path: '/name/full', value: `${createData.name.first} ${createData.name.middle} ${createData.name.last}`}
+let updateUser = await db.patch(new RecordId("user", createData[0].id.id), [
+    { op: 'add', path: '/name/full', value: `${createData[0].name.first} ${createData[0].name.middle} ${createData[0].name.last}`}
 ]);
